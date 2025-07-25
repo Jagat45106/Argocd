@@ -1,2 +1,2 @@
-# Jenkins-TF-Lab
-Repo to run Jenkins CICD to test Terraform actions
+# Argo CD application deployment repo
+Repo to create application in K8s cluster
