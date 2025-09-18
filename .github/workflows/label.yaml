@@ -1,0 +1,28 @@
+name: Add jfrog and sonar topics
+
+on:
+  schedule:
+    - cron: '0 0,12 * * *'
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, edited]
+
+jobs:
+  manage-topics:
+    name: Manage Repository Topics
+    runs-on:
+        - ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate with GitHub CLI
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+          gh auth status
+
+      - name: Run repository topics management script
+        run: |
+          chmod +x scripts/label.sh
+          scripts/label.sh
